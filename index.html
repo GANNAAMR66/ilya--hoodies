@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ilya - Hoodies Brand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Dancing+Script:wght@700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #c9a96e;
+            --accent: #8b7355;
+            --light: #f9f9f9;
+            --success: #10b981;
+            --gradient: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--light); line-height: 1.6; }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 60px; width: auto; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--secondary); }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .category-container { max-width: 1200px; margin: 0 auto; }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-card.active {
+            border-color: var(--secondary);
+            background: linear-gradient(135deg, rgba(201,169,110,0.1) 0%, rgba(201,169,110,0.05) 100%);
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .category-card p { color: #666; }
+
+        .category-check {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s;
+        }
+
+        .category-card.active .category-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 320px;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info { padding: 1.5rem; }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .add-to-cart {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Custom Design Section */
+        .custom-design {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .custom-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .custom-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .custom-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .custom-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.95);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .custom-text-overlay h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .custom-text-overlay p {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .custom-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .custom-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .custom-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .custom-features li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .custom-features li i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Order Form Section */
+        .order-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .order-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 2rem;
+            background: #f9f9f9;
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: #f0f0f0;
+            border-color: var(--primary);
+        }
+
+        .file-upload-label i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Price Summary Box */
+        .price-summary {
+            background: linear-gradient(135deg, rgba(201,169,110,0.1) 0%, rgba(201,169,110,0.05) 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .price-summary h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(201,169,110,0.3);
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--secondary);
+            padding-top: 1rem;
+        }
+
+        .extra-fee {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* Deposit Payment Box - NEW */
+        .deposit-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            display: none;
+            animation: slideDown 0.5s ease;
+        }
+
+        .deposit-box.active { display: block; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .deposit-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .deposit-info {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .deposit-amount {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .insta-pay-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .insta-pay-info i {
+            font-size: 2rem;
+        }
+
+        .insta-pay-info .number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            flex: 1;
+        }
+
+        .copy-btn {
+            background: white;
+            color: var(--success);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .deposit-steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .deposit-steps li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .deposit-steps li i {
+            color: #fbbf24;
+        }
+
+        .confirm-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .confirm-checkbox input {
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .confirm-checkbox label {
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+        }
+
+        .footer-section ul { list-style: none; }
+
+        .footer-section ul li { margin-bottom: 0.8rem; }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover { color: var(--secondary); }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info i { color: var(--secondary); }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { right: 0; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 2rem; }
+            .custom-container { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+            .category-grid { grid-template-columns: 1fr; }
+            .insta-pay-info { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .order-form { padding: 2rem 1.5rem; }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .success-message { text-align: center; padding: 2rem; }
+
+        .success-message i {
+            font-size: 4rem;
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Images/ilya-logo.png" alt="ilya logo">
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#category">الفئات</a></li>
+                <li><a href="#products">الهوديز</a></li>
+                <li><a href="#custom">تصميمك الخاص</a></li>
+                <li><a href="#order">اطلب الآن</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ilya Hoodies</h1>
+            <p>هوديز عصرية بتصاميم فريدة وجودة عالية. اختار من مجموعتنا أو صمم هوديك بنفسك!</p>
+            <a href="#category" class="btn">اختار فئتك الآن</a>
+        </div>
+    </section>
+
+    <!-- Category Section - رجالي / حريمي / رياضي -->
+    <section class="category-section" id="category">
+        <div class="category-container">
+            <h2 class="section-title">اختار الفئة</h2>
+            <p class="section-subtitle">اختار الفئة المناسبة ليك عشان نعرضلك المنتجات المناسبة</p>
+            
+            <div class="category-grid">
+                <div class="category-card" onclick="selectCategory('men', this)">
+                    <div class="category-check"><i class="fas fa-check"></i></div>
+                    <div class="category-icon"><i class="fas fa-male"></i></div>
+                    <h3>رجالي</h3>
+                    <p>هوديز رجالي بتصاميم عصرية وألوان مميزة</p>
+                </div>
+
+                <div class="category-card" onclick="selectCategory('women', this)">
+                    <div class="category-check"><i class="fas fa-check"></i></div>
+                    <div class="category-icon"><i class="fas fa-female"></i></div>
+                    <h3>حريمي</h3>
+                    <p>هوديز حريمي بألوان هادية وتصاميم أنيقة</p>
+                </div>
+
+                <div class="category-card" onclick="selectCategory('sport', this)">
+                    <div class="category-check"><i class="fas fa-check"></i></div>
+                    <div class="category-icon"><i class="fas fa-running"></i></div>
+                    <h3>رياضي</h3>
+                    <p>هوديز رياضية مريحة للتمارين والأنشطة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">مجموعتنا من الهوديز</h2>
+        <p class="section-subtitle" id="productsSubtitle">اختار الفئة الأولى عشان نشوفك المنتجات المناسبة</p>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Custom Design Section -->
+    <section class="custom-design" id="custom">
+        <div class="custom-container">
+            <div class="custom-image">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=800&fit=crop" alt="Custom Hoodie">
+                <div class="custom-text-overlay">
+                    <h3>اختار الطبعة على مزاجك</h3>
+                    <p>صمم هوديك بنفسك!</p>
+                </div>
+            </div>
+            <div class="custom-content">
+                <h2>صمم هوديك الخاص</h2>
+                <p>عايز هودي بطبعة مختلفة؟ عندك فكرة تصميم معينة؟ مفيش مشكلة! تقدر ترفع الصورة اللي تعجبك واحنا هنطبعها على الهودي بجودة عالية.</p>
+                <div style="background: rgba(201,169,110,0.1); padding: 1rem; border-radius: 10px; margin: 1.5rem 0; border-right: 4px solid var(--secondary);">
+                    <p style="color: var(--primary); font-weight: 700; margin: 0;">
+                        <i class="fas fa-info-circle" style="color: var(--secondary);"></i>
+                        الطباعة المخصصة بتضيف <strong>100 جنيه</strong> على سعر الهودي الأساسي
+                    </p>
+                </div>
+                <ul class="custom-features">
+                    <li><i class="fas fa-check-circle"></i> جودة طباعة عالية</li>
+                    <li><i class="fas fa-check-circle"></i> خامات ممتازة</li>
+                    <li><i class="fas fa-check-circle"></i> ألوان ثابتة</li>
+                    <li><i class="fas fa-check-circle"></i> توصيل سريع</li>
+                </ul>
+                <a href="#order" class="btn">اطلب هوديك المخصص</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section class="order-section" id="order">
+        <h2 class="section-title">اطلب الآن</h2>
+        <p class="section-subtitle">املأ البيانات وهنتواصل معاك لتأكيد الطلب</p>
+        
+        <form class="order-form" id="orderForm" action="https://formsubmit.co/ganna662006@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="طلب جديد من موقع ilya">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://formsubmit.co/thanks">
+            
+            <div class="form-group">
+                <label>الفئة *</label>
+                <select name="الفئة" id="categorySelect" required onchange="updateProductsByCategory()">
+                    <option value="">-- اختر الفئة --</option>
+                    <option value="men">رجالي</option>
+                    <option value="women">حريمي</option>
+                    <option value="sport">رياضي</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>اختر المنتج *</label>
+                <select name="المنتج" id="productSelect" required onchange="calculateTotalPrice()">
+                    <option value="">-- اختر الهودي --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>المقاس *</label>
+                <select name="المقاس" id="sizeSelect" required onchange="calculateTotalPrice()">
+                    <option value="">-- اختر المقاس --</option>
+                    <option value="S">S - صغير</option>
+                    <option value="M">M - متوسط</option>
+                    <option value="L">L - كبير</option>
+                    <option value="XL">XL - كبير جداً</option>
+                    <option value="XXL">XXL - أكبر مقاس</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>نوع الطباعة *</label>
+                <select name="نوع_الطباعة" id="printType" required onchange="toggleCustomUpload(); calculateTotalPrice()">
+                    <option value="">-- اختر نوع الطباعة --</option>
+                    <option value="طباعة عادية">طباعة عادية (من التصميمات الموجودة)</option>
+                    <option value="طباعة مخصصة">طباعة مخصصة (أرفع تصميمي الخاص) +100 جنيه</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="customUploadGroup" style="display: none;">
+                <label>ارفع صورة التصميم</label>
+                <div class="file-upload">
+                    <input type="file" name="صورة_التصميم" id="customImage" accept="image/*" onchange="showFileName(this)">
+                    <div class="file-upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>اضغط هنا لرفع صورة التصميم</p>
+                        <small>PNG, JPG, JPEG (حد أقصى 5MB)</small>
+                    </div>
+                </div>
+                <div class="file-name" id="fileName"></div>
+            </div>
+
+            <!-- Price Summary -->
+            <div class="price-summary" id="priceSummary" style="display: none;">
+                <h3><i class="fas fa-receipt"></i> ملخص السعر</h3>
+                <div class="price-row">
+                    <span>سعر الهودي الأساسي:</span>
+                    <span id="basePrice">0 جنيه</span>
+                </div>
+                <div class="price-row" id="customPrintRow" style="display: none;">
+                    <span>رسوم الطباعة المخصصة:</span>
+                    <span class="extra-fee">+100 جنيه</span>
+                </div>
+                <div class="price-row">
+                    <span>الإجمالي:</span>
+                    <span id="totalPrice">0 جنيه</span>
+                </div>
+            </div>
+
+            <!-- Deposit Payment Box - NEW -->
+            <div class="deposit-box" id="depositBox">
+                <h3><i class="fas fa-money-bill-wave"></i> دفع ديبوزيت (عربون)</h3>
+                <p>للطلبات بطباعة مخصصة، مطلوب تحويل ديبوزيت <strong>25% من الإجمالي</strong> قبل البدء في التنفيذ</p>
+                
+                <div class="deposit-info">
+                    <div class="deposit-amount">
+                        <span id="depositAmount">0</span> جنيه
+                    </div>
+                    <p style="text-align: center; opacity: 0.9;">= 25% من إجمالي الطلب</p>
+                </div>
+
+                <div class="insta-pay-info">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.9rem; opacity: 0.9;">انستا باي / فودافون كاش</div>
+                        <div class="number" id="instaNumber">01027954460</div>
+                    </div>
+                    <button type="button" class="copy-btn" onclick="copyNumber()">
+                        <i class="fas fa-copy"></i> نسخ
+                    </button>
+                </div>
+
+                <ul class="deposit-steps">
+                    <li><i class="fas fa-check-circle"></i> حوّل مبلغ الديبوزيت على الرقم أعلاه</li>
+                    <li><i class="fas fa-check-circle"></i> ارفع صورة إيصال التحويل في الخانة اللي تحت</li>
+                    <li><i class="fas fa-check-circle"></i> هنبدأ التنفيذ فور تأكيد التحويل</li>
+                    <li><i class="fas fa-check-circle"></i> الباقي عند الاستلام</li>
+                </ul>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>ارفع صورة إيصال التحويل *</label>
+                    <div class="file-upload">
+                        <input type="file" name="ايصال_التحويل" id="receiptImage" accept="image/*" onchange="showReceiptName(this)" required>
+                        <div class="file-upload-label">
+                            <i class="fas fa-receipt"></i>
+                            <p>اضغط هنا لرفع صورة إيصال التحويل</p>
+                            <small>PNG, JPG, JPEG</small>
+                        </div>
+                    </div>
+                    <div class="file-name" id="receiptFileName"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم العملية (اختياري)</label>
+                    <input type="text" name="رقم_العملية" id="transactionNumber" placeholder="لو فيه رقم عملية من انستا باي">
+                </div>
+
+                <div class="confirm-checkbox">
+                    <input type="checkbox" id="depositConfirm" required onchange="toggleSubmitButton()">
+                    <label for="depositConfirm">أؤكد إني حوّلت مبلغ الديبوزيت (<span id="confirmDepositAmount">0</span> جنيه) على الرقم المذكور وأوافق على بدء التنفيذ</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>الاسم الكامل *</label>
+                    <input type="text" name="الاسم" id="customerName" required placeholder="اكتب اسمك">
+                </div>
+                <div class="form-group">
+                    <label>رقم التليفون الأول *</label>
+                    <input type="tel" name="تليفون_1" id="phone1" required placeholder="01xxxxxxxxx">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>رقم التليفون الثاني</label>
+                    <input type="tel" name="تليفون_2" id="phone2" placeholder="01xxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>رقم الواتساب *</label>
+                    <input type="tel" name="واتساب" id="whatsapp" required placeholder="01xxxxxxxxx">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>العنوان بالتفصيل *</label>
+                <textarea name="العنوان" id="address" rows="3" required placeholder="المحافظة - المدينة - الشارع - رقم العمارة"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>علامة مميزة عند البيت *</label>
+                <input type="text" name="علامة_مميزة" id="landmark" required placeholder="مثال: أمام مسجد كذا، بجوار مدرسة كذا، إلخ">
+            </div>
+
+            <div class="form-group">
+                <label>ملاحظات إضافية</label>
+                <textarea name="ملاحظات" id="notes" rows="2" placeholder="أي ملاحظات تانية على الطلب"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> إرسال الطلب
+            </button>
+        </form>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <div class="feature">
+                <i class="fas fa-truck"></i>
+                <h3>توصيل سريع</h3>
+                <p>لجميع المحافظات</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-medal"></i>
+                <h3>جودة عالية</h3>
+                <p>خامات ممتازة</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-palette"></i>
+                <h3>تصاميم فريدة</h3>
+                <p>أو صمم بنفسك</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>دعم متواصل</h3>
+                <p>على واتساب</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="Images/ilya-logo.png" alt="ilya logo" style="height: 80px; margin-bottom: 1rem;">
+                <p>براند هوديز مصري يقدم تصاميم عصرية بجودة عالية. صمم هوديك بنفسك أو اختار من مجموعتنا!</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100009427256506" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@ganona600" target="_blank" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ganna_amr2006/" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/201027954460" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> <a href="tel:01027954460">01027954460</a></li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/201027954460">واتساب</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:ganna662006@gmail.com">ganna662006@gmail.com</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i> مصر</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#category">الفئات</a></li>
+                    <li><a href="#products">الهوديز</a></li>
+                    <li><a href="#custom">تصميمك الخاص</a></li>
+                    <li><a href="#order">اطلب الآن</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تابعنا</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100009427256506" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@ganona600" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ganna_amr2006/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 جميع الحقوق محفوظة | ilya Hoodies</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h2>تم إرسال طلبك بنجاح!</h2>
+                <p>هنتواصل معاك خلال 24 ساعة لتأكيد الطلب</p>
+                <p style="margin-top: 1rem; color: var(--secondary); font-weight: 600;">
+                    للاستفسار: <a href="https://wa.me/201027954460" style="color: var(--secondary);">01027954460</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Products Data - رجالي / حريمي / رياضي
+        const products = [
+            // رجالي
+            { id: 1, name: "هودي أبيض رجالي", category: "هوديز", type: "men", price: 450, oldPrice: 550, image: "Images/white-hoodie.jpg", badge: "الأكثر مبيعاً" },
+            { id: 2, name: "هودي أسود كلاسيك رجالي", category: "هوديز", type: "men", price: 480, oldPrice: 600, image: "Images/black-hoodie.jpg", badge: "جديد" },
+            { id: 3, name: "هودي كحلي رجالي", category: "هوديز", type: "men", price: 440, oldPrice: 540, image: "Images/navy-hoodie.jpg", badge: null },
+            
+            // حريمي
+            { id: 4, name: "هودي بيج حريمي", category: "هوديز", type: "women", price: 420, oldPrice: 500, image: "Images/beige-hoodie.jpg", badge: null },
+            { id: 5, name: "هودي رمادي ميلانج حريمي", category: "هوديز", type: "women", price: 450, oldPrice: 550, image: "Images/gray-hoodie.jpg", badge: "خصم" },
+            { id: 6, name: "هودي زيتي حريمي", category: "هوديز", type: "women", price: 460, oldPrice: 560, image: "Images/olive-hoodie.jpg", badge: "مميز" },
+            
+            // رياضي
+            { id: 7, name: "هودي رياضي أسود", category: "هوديز رياضية", type: "sport", price: 500, oldPrice: 620, image: "Images/black-hoodie.jpg", badge: "جديد" },
+            { id: 8, name: "هودي رياضي رمادي", category: "هوديز رياضية", type: "sport", price: 490, oldPrice: 600, image: "Images/gray-hoodie.jpg", badge: null },
+            { id: 9, name: "هودي رياضي كحلي", category: "هوديز رياضية", type: "sport", price: 510, oldPrice: 630, image: "Images/navy-hoodie.jpg", badge: "مميز" }
+        ];
+
+        let cartCount = 0;
+        let selectedCategory = '';
+        const CUSTOM_PRINT_FEE = 100;
+        const DEPOSIT_PERCENTAGE = 0.25; // 25%
+
+        // Category Selection
+        function selectCategory(category, element) {
+            selectedCategory = category;
+            document.querySelectorAll('.category-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('categorySelect').value = category;
+            updateProductsByCategory();
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Update products based on category
+        function updateProductsByCategory() {
+            const category = document.getElementById('categorySelect').value || selectedCategory;
+            const productsGrid = document.getElementById('productsGrid');
+            const productSelect = document.getElementById('productSelect');
+            const subtitle = document.getElementById('productsSubtitle');
+            
+            if (!category) {
+                productsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666; padding: 2rem;">اختار الفئة الأول عشان نشوفك المنتجات</p>';
+                productSelect.innerHTML = '<option value="">-- اختر الهودي --</option>';
+                subtitle.textContent = 'اختار الفئة الأولى عشان نشوفك المنتجات المناسبة';
+                return;
+            }
+
+            const categoryNames = {
+                'men': 'رجالي',
+                'women': 'حريمي',
+                'sport': 'رياضي'
+            };
+
+            subtitle.textContent = `منتجات ${categoryNames[category]} - اختار اللي يعجبك`;
+            const filteredProducts = products.filter(p => p.type === category);
+            
+            productsGrid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400?text=${encodeURIComponent(product.name)}'">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-description">هودي قطن 100% بجودة عالية</p>
+                        <div class="product-footer">
+                            <div>
+                                <span class="price">${product.price} جنيه</span>
+                                ${product.oldPrice ? `<span class="old-price">${product.oldPrice}</span>` : ''}
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            productSelect.innerHTML = '<option value="">-- اختر الهودي --</option>' +
+                filteredProducts.map(p => `<option value="${p.id}" data-price="${p.price}">${p.name} - ${p.price} جنيه</option>`).join('');
+            
+            calculateTotalPrice();
+        }
+
+        // Calculate Total Price + Deposit
+        function calculateTotalPrice() {
+            const productSelect = document.getElementById('productSelect');
+            const printType = document.getElementById('printType').value;
+            const priceSummary = document.getElementById('priceSummary');
+            const customPrintRow = document.getElementById('customPrintRow');
+            const depositBox = document.getElementById('depositBox');
+            
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const basePrice = selectedOption.dataset.price ? parseInt(selectedOption.dataset.price) : 0;
+            
+            if (basePrice === 0) {
+                priceSummary.style.display = 'none';
+                depositBox.classList.remove('active');
+                return;
+            }
+            
+            priceSummary.style.display = 'block';
+            document.getElementById('basePrice').textContent = basePrice + ' جنيه';
+            
+            let totalPrice = basePrice;
+            let isCustomPrint = (printType === 'طباعة مخصصة');
+            
+            if (isCustomPrint) {
+                customPrintRow.style.display = 'flex';
+                totalPrice += CUSTOM_PRINT_FEE;
+                // Show deposit box
+                depositBox.classList.add('active');
+                const depositAmount = Math.round(totalPrice * DEPOSIT_PERCENTAGE);
+                document.getElementById('depositAmount').textContent = depositAmount;
+                document.getElementById('confirmDepositAmount').textContent = depositAmount;
+            } else {
+                customPrintRow.style.display = 'none';
+                depositBox.classList.remove('active');
+                // Reset deposit fields
+                document.getElementById('depositConfirm').checked = false;
+                document.getElementById('receiptImage').value = '';
+                document.getElementById('receiptFileName').textContent = '';
+            }
+            
+            document.getElementById('totalPrice').textContent = totalPrice + ' جنيه';
+            toggleSubmitButton();
+        }
+
+        function toggleSubmitButton() {
+            const printType = document.getElementById('printType').value;
+            const depositConfirm = document.getElementById('depositConfirm').checked;
+            const submitBtn = document.getElementById('submitBtn');
+            const depositBox = document.getElementById('depositBox');
+            
+            if (printType === 'طباعة مخصصة' && depositBox.classList.contains('active')) {
+                submitBtn.disabled = !depositConfirm;
+            } else {
+                submitBtn.disabled = false;
+            }
+        }
+
+        function copyNumber() {
+            const number = document.getElementById('instaNumber').textContent;
+            navigator.clipboard.writeText(number).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                btn.style.background = '#10b981';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = 'white';
+                    btn.style.color = '#10b981';
+                }, 2000);
+            });
+        }
+
+        function addToCart(productId) {
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+            
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('categorySelect').value = product.type;
+                selectedCategory = product.type;
+                updateProductsByCategory();
+                
+                setTimeout(() => {
+                    document.getElementById('productSelect').value = productId;
+                    calculateTotalPrice();
+                }, 100);
+            }
+        }
+
+        function toggleCustomUpload() {
+            const printType = document.getElementById('printType').value;
+            const uploadGroup = document.getElementById('customUploadGroup');
+            uploadGroup.style.display = (printType === 'طباعة مخصصة') ? 'block' : 'none';
+        }
+
+        function showFileName(input) {
+            const fileName = document.getElementById('fileName');
+            if (input.files && input.files[0]) {
+                fileName.textContent = 'تم رفع: ' + input.files[0].name;
+            }
+        }
+
+        function showReceiptName(input) {
+            const fileName = document.getElementById('receiptFileName');
+            if (input.files && input.files[0]) {
+                fileName.textContent = 'تم رفع: ' + input.files[0].name;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Initialize
+        updateProductsByCategory();
+    </script>
+</body>
+</html>
